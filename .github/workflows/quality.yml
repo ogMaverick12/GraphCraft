@@ -52,10 +52,10 @@ jobs:
       - name: Dependency security audit (high and above)
         run: npm audit --audit-level=high
 
-      - name: Dependency licence guard (direct deps: MIT/ISC/Apache-2.0)
+      - name: 'Dependency licence guard (direct deps: MIT/ISC/Apache-2.0)'
         run: node scripts/check-licenses.mjs
 
-      - name: Preview smoke (served build: title + worker + manifest + notices)
+      - name: 'Preview smoke (served build: title + worker + manifest + notices)'
         run: |
           npm run preview -- --port 4173 --strictPort &
           PREVIEW_PID=$!
