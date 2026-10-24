@@ -1,0 +1,18 @@
+{
+  "name": "GraphCraft — scientific graphing and mathematics studio",
+  "short_name": "GraphCraft",
+  "description": "Free, open-source, local-first scientific graphing and mathematics studio.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#fafaf9",
+  "theme_color": "#fafaf9",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "format": "graphcraft-project",
+  "version": 1,
+  "title": "Quadratic and sine",
+  "expressions": [
+    {
+      "id": "example-parabola",
+      "source": "x^2",
+      "visible": true,
+      "colorIndex": 0
+    },
+    {
+      "id": "example-wave",
+      "source": "sin(x)",
+      "visible": true,
+      "colorIndex": 1
+    }
+  ],
+  "viewport": {
+    "xMin": -10,
+    "xMax": 10,
+    "yMin": -7,
+    "yMax": 7,
+    "equalAspect": false,
+    "showGrid": true
+  }
+}

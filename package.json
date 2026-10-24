@@ -1,0 +1,39 @@
+{
+  "name": "graphcraft",
+  "private": true,
+  "version": "0.1.0",
+  "description": "GraphCraft — free, open-source, local-first scientific graphing and mathematics studio (Stage 1 foundation).",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build && node scripts/inject-sw-assets.mjs",
+    "typecheck": "tsc -b",
+    "lint": "oxlint --deny-warnings",
+    "test": "vitest run",
+    "notices:check": "node scripts/check-notices.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^0.561.0",
+    "mathjs": "^15.2.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "tailwindcss": "^4.1.14"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.14",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.1",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "jsdom": "^27.4.0",
+    "oxlint": "^1.81.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^4.0.17"
+  }
+}

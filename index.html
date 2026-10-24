@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#fafaf9" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="GraphCraft — free, open-source, local-first scientific graphing and mathematics studio." />
+    <title>GraphCraft</title>
+    <script>
+      // Apply the persisted theme before first paint to avoid a flash
+      // of the wrong theme. Mirrors src/storage/theme.ts (same key/logic).
+      try {
+        var gcTheme = localStorage.getItem('graphcraft-theme');
+        if (gcTheme === 'dark' || (!gcTheme && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
