@@ -4,12 +4,14 @@ import type { WorldRect } from '../graph/coordinate.ts'
 import { compileExpression } from '../math/index.ts'
 
 /**
- * Learn library model (Stage 5 LEARN-01): curated, original graph
- * templates with searchable metadata and independently checked
- * properties. Pure data + pure validation: no React, no DOM, no
- * network — remote content is never fetched. Every template is
- * GraphCraft-authored; anything derived from external material must
- * carry explicit attribution (none do yet).
+ * Learn library model (Stage 5 LEARN-01): curated graph templates with
+ * searchable metadata and independently checked properties. Pure data
+ * plus pure validation: no React, no DOM, no network — remote content
+ * is never fetched. Human-readable prose was rewritten in the S8.17
+ * clean-room pass; stable ids, formulas, checks, and numeric properties
+ * were retained. The optional attribution field records a verified
+ * external source when one exists; absence means no source is recorded,
+ * not proof of originality. See docs/PROVENANCE.md.
  */
 
 export type LearnCategory =
@@ -183,7 +185,7 @@ export interface LearnTemplate {
   readonly viewport: WorldRect
   /** Pedagogical simplifications, stated (e.g. signum convention at 0). */
   readonly simplifications?: string
-  /** Required when derived from external material; omitted means GraphCraft-original. */
+  /** Required when derived from external material; omission records no external source, not originality. */
   readonly attribution?: string
   /** Curated feature annotations (verified per ANALYSES.md). */
   readonly annotations?: LearnAnnotation[]

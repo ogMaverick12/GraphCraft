@@ -30,20 +30,20 @@ describe('learn library', () => {
     await user.selectOptions(screen.getByRole('combobox', { name: 'Filter by graph type' }), 'Polar')
     const polar = LEARN_TEMPLATES.filter((t) => t.rows.some((row) => row.kind === 'polar')).length
     expect(await screen.findByTestId('learn-count')).toHaveTextContent(`${polar} templates match the current filters.`)
-    expect(await screen.findByText('Cardioid')).toBeInTheDocument()
+    expect(await screen.findByText('Cardioid polar curve')).toBeInTheDocument()
   })
 
   it('expands a card with preview, formula, and objective', async () => {
     const user = userEvent.setup()
     await openLearn(user)
 
-    await user.click(screen.getByRole('button', { name: 'Expand Reciprocal hyperbola' }))
-    const preview = await screen.findByRole('img', { name: 'Preview of Reciprocal hyperbola' })
+    await user.click(screen.getByRole('button', { name: 'Expand Reciprocal curve with a vertical pole' }))
+    const preview = await screen.findByRole('img', { name: 'Preview of Reciprocal curve with a vertical pole' })
     expect(preview).toBeInTheDocument()
     // Fixed light plate: the fixed palette stays legible in both themes.
     expect(preview.getAttribute('class')).toContain('bg-white')
     expect(screen.getByText('y = 1/x')).toBeInTheDocument()
-    expect(screen.getByText(/Recognise poles/)).toBeInTheDocument()
+    expect(screen.getByText(/Identify a pole/)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Use recommended view' })).toBeInTheDocument()
   })
 
@@ -51,10 +51,10 @@ describe('learn library', () => {
     const user = userEvent.setup()
     await openLearn(user)
 
-    await user.click(screen.getByRole('button', { name: 'Expand Parabola and its vertex' }))
+    await user.click(screen.getByRole('button', { name: 'Expand Upward parabola and its lowest point' }))
     expect(await screen.findByText('y = x²−4')).toBeInTheDocument()
 
-    await user.click(screen.getByRole('button', { name: 'Expand Different powers per side' }))
+    await user.click(screen.getByRole('button', { name: 'Expand Square and cube joined at zero' }))
     expect(await screen.findByText(/Domain: All real numbers/)).toBeInTheDocument()
     expect(screen.getByText(/Decreasing on/)).toBeInTheDocument()
     expect(screen.getByText(/Minimum at \(0, 0\)/)).toBeInTheDocument()
@@ -66,13 +66,13 @@ describe('learn library', () => {
     const before = JSON.stringify(LEARN_TEMPLATES)
     expect(screen.getByText('No expressions')).toBeInTheDocument()
 
-    await user.click(screen.getByRole('button', { name: 'Open Sine wave' }))
+    await user.click(screen.getByRole('button', { name: 'Open Sine curve over one full cycle' }))
     await screen.findByRole('main', { name: 'Graph viewport' })
     expect(screen.getByText('1 expression')).toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: 'Show learn library' }))
     await screen.findByTestId('learn-count')
-    await user.click(screen.getByRole('button', { name: 'Open Tangent line touching a parabola' }))
+    await user.click(screen.getByRole('button', { name: 'Open Line tangent to a parabola' }))
     await screen.findByRole('main', { name: 'Graph viewport' })
     // Two template rows added on top of the first — nothing rewritten.
     expect(screen.getByText('3 expressions')).toBeInTheDocument()
@@ -85,14 +85,14 @@ describe('learn library', () => {
     const user = userEvent.setup()
     await openLearn(user)
 
-    await user.click(screen.getByRole('button', { name: '☆ Save Cardioid' }))
-    expect(await screen.findByRole('button', { name: '★ Saved Cardioid' })).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: '☆ Save Cardioid polar curve' }))
+    expect(await screen.findByRole('button', { name: '★ Saved Cardioid polar curve' })).toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: 'Show graph studio' }))
     await screen.findByRole('main', { name: 'Graph viewport' })
     await user.click(screen.getByRole('button', { name: 'Show learn library' }))
     await screen.findByTestId('learn-count')
-    expect(await screen.findByRole('button', { name: '★ Saved Cardioid' })).toBeInTheDocument()
+    expect(await screen.findByRole('button', { name: '★ Saved Cardioid polar curve' })).toBeInTheDocument()
 
     await user.click(screen.getByRole('checkbox', { name: 'Show bookmarked only' }))
     expect(await screen.findByTestId('learn-count')).toHaveTextContent('1 template match the current filters.')
@@ -105,7 +105,7 @@ describe('learn library', () => {
     await user.selectOptions(screen.getByRole('combobox', { name: 'Browse by topic' }), 'Conic sections')
     expect(await screen.findByTestId('topic-banner')).toHaveTextContent('Conic sections')
     expect(await screen.findByTestId('learn-count')).toHaveTextContent('4 templates match the current filters.')
-    expect(screen.queryByText('Cardioid')).not.toBeInTheDocument()
+    expect(screen.queryByText('Cardioid polar curve')).not.toBeInTheDocument()
 
     // Prerequisite trails navigate: Quadratics is required before conics.
     await user.click(screen.getByRole('button', { name: 'Quadratics' }))
@@ -119,11 +119,11 @@ describe('learn annotations', () => {
     const user = userEvent.setup()
     await openLearn(user)
 
-    await user.click(screen.getByRole('button', { name: 'Expand Parabola and its vertex' }))
-    const list = await screen.findByRole('list', { name: 'Annotations for Parabola and its vertex' })
+    await user.click(screen.getByRole('button', { name: 'Expand Upward parabola and its lowest point' }))
+    const list = await screen.findByRole('list', { name: 'Annotations for Upward parabola and its lowest point' })
     expect(list.textContent).toContain('Vertex (0, −4)')
     expect(list.textContent).toContain('exact')
-    const preview = await screen.findByRole('img', { name: 'Preview of Parabola and its vertex' })
+    const preview = await screen.findByRole('img', { name: 'Preview of Upward parabola and its lowest point' })
     expect(preview.querySelectorAll('circle').length).toBeGreaterThan(0)
 
     await user.click(screen.getByRole('checkbox', { name: 'Show annotation markers on preview' }))
@@ -135,11 +135,11 @@ describe('learn annotations', () => {
     await openLearn(user)
 
     fireEvent.change(screen.getByRole('searchbox', { name: 'Search templates' }), { target: { value: 'shift inside' } })
-    await user.click(screen.getByRole('button', { name: 'Expand Shift inside the brackets goes right' }))
+    await user.click(screen.getByRole('button', { name: 'Expand Horizontal shift inside a squared term' }))
     expect(await screen.findByText(/What changed:/)).toBeInTheDocument()
-    expect(screen.getByText(/minus means right/)).toBeInTheDocument()
+    expect(screen.getByText(/moves two units to the right/)).toBeInTheDocument()
 
-    const preview = await screen.findByRole('img', { name: 'Preview of Shift inside the brackets goes right' })
+    const preview = await screen.findByRole('img', { name: 'Preview of Horizontal shift inside a squared term' })
     const before = preview.querySelectorAll('path').length
     await user.click(screen.getByRole('checkbox', { name: 'Compare with original function' }))
     expect(preview.querySelectorAll('path').length).toBeGreaterThan(before)
@@ -149,13 +149,13 @@ describe('learn annotations', () => {
     const user = userEvent.setup()
     await openLearn(user)
 
-    await user.click(screen.getByRole('button', { name: 'Expand Parabola and its vertex' }))
+    await user.click(screen.getByRole('button', { name: 'Expand Upward parabola and its lowest point' }))
     // Rows first (export needs a curve), then markers.
-    await user.click(screen.getByRole('button', { name: 'Open Parabola and its vertex' }))
+    await user.click(screen.getByRole('button', { name: 'Open Upward parabola and its lowest point' }))
     await screen.findByRole('main', { name: 'Graph viewport' })
     await user.click(screen.getByRole('button', { name: 'Show learn library' }))
     await screen.findByTestId('learn-count')
-    await user.click(screen.getByRole('button', { name: 'Expand Parabola and its vertex' }))
+    await user.click(screen.getByRole('button', { name: 'Expand Upward parabola and its lowest point' }))
     await user.click(screen.getByRole('button', { name: 'Show on graph' }))
     expect(await screen.findByRole('button', { name: 'Hide graph markers' })).toBeInTheDocument()
 
@@ -176,7 +176,7 @@ describe('learn annotations', () => {
     const user = userEvent.setup()
     await openLearn(user)
 
-    await user.click(screen.getByRole('button', { name: 'Expand Parabola and its vertex' }))
+    await user.click(screen.getByRole('button', { name: 'Expand Upward parabola and its lowest point' }))
     await user.click(screen.getByRole('button', { name: 'Show on graph' }))
     expect(await screen.findByRole('button', { name: 'Hide graph markers' })).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: 'Hide graph markers' }))
@@ -193,13 +193,13 @@ describe('learn exploration', () => {
     const user = userEvent.setup()
     await openLearn(user)
 
-    const expand = screen.getByRole('button', { name: 'Expand Sine wave' })
+    const expand = screen.getByRole('button', { name: 'Expand Sine curve over one full cycle' })
     expand.focus()
     expect(expand).toHaveFocus()
     await user.keyboard('{Enter}')
-    expect(await screen.findByRole('img', { name: 'Preview of Sine wave' })).toBeInTheDocument()
+    expect(await screen.findByRole('img', { name: 'Preview of Sine curve over one full cycle' })).toBeInTheDocument()
 
-    const open = screen.getByRole('button', { name: 'Open Sine wave' })
+    const open = screen.getByRole('button', { name: 'Open Sine curve over one full cycle' })
     open.focus()
     await user.keyboard('{Enter}')
     await screen.findByRole('main', { name: 'Graph viewport' })
@@ -214,7 +214,7 @@ describe('learn exploration', () => {
     }
     const recommended = formatViewLabel(sine.viewport)
 
-    await user.click(screen.getByRole('button', { name: 'Open Sine wave' }))
+    await user.click(screen.getByRole('button', { name: 'Open Sine curve over one full cycle' }))
     await screen.findByRole('main', { name: 'Graph viewport' })
     // Disturb the view first so the reset is observable.
     await user.click(screen.getByRole('button', { name: 'Zoom in' }))
@@ -222,7 +222,7 @@ describe('learn exploration', () => {
 
     await user.click(screen.getByRole('button', { name: 'Show learn library' }))
     await screen.findByTestId('learn-count')
-    await user.click(screen.getByRole('button', { name: 'Expand Sine wave' }))
+    await user.click(screen.getByRole('button', { name: 'Expand Sine curve over one full cycle' }))
     await user.click(screen.getByRole('button', { name: 'Use recommended view' }))
     expect(screen.getByTitle('Current mathematical view')).toHaveTextContent(recommended)
   })
@@ -232,7 +232,7 @@ describe('learn exploration', () => {
     await openLearn(user)
     const before = JSON.stringify(LEARN_TEMPLATES)
 
-    await user.click(screen.getByRole('button', { name: 'Open Sine wave' }))
+    await user.click(screen.getByRole('button', { name: 'Open Sine curve over one full cycle' }))
     await screen.findByRole('main', { name: 'Graph viewport' })
     const editor = screen.getByRole('textbox', { name: 'Expression' })
     await user.clear(editor)
@@ -247,7 +247,7 @@ describe('learn exploration', () => {
     const user = userEvent.setup()
     await openLearn(user)
 
-    await user.click(screen.getByRole('button', { name: 'Open Sine wave' }))
+    await user.click(screen.getByRole('button', { name: 'Open Sine curve over one full cycle' }))
     await screen.findByRole('main', { name: 'Graph viewport' })
     const editor = screen.getByRole('textbox', { name: 'Expression' })
     await user.clear(editor)
@@ -263,7 +263,7 @@ describe('learn exploration', () => {
     const user = userEvent.setup()
     await openLearn(user)
 
-    await user.click(screen.getByRole('button', { name: 'Open Sine wave' }))
+    await user.click(screen.getByRole('button', { name: 'Open Sine curve over one full cycle' }))
     await screen.findByRole('main', { name: 'Graph viewport' })
     fireEvent.change(screen.getByRole('textbox', { name: 'New parameter name' }), { target: { value: 'h' } })
     await user.click(screen.getByRole('button', { name: 'Add parameter' }))

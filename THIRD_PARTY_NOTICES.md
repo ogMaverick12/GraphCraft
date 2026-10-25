@@ -53,9 +53,18 @@ fails the build.
 
 ## Provenance and open questions
 
-- The application favicon and Learn templates are project-authored, with no
-  listed third-party asset source; this is an assertion, not an independently
-  verifiable provenance record.
+- The current application favicon is a GraphCraft-specific SVG created during
+  the S8.17 remediation. It replaces an earlier favicon whose source and
+  permission were not independently established; the earlier asset is not
+  relied on here. See `docs/PROVENANCE.md`.
+- Human-readable Learn prose (42 template records, 12 topic summaries, 8
+  practice prompts and explanations) was rewritten in a documented clean-room
+  pass during S8.17. Stable ids, formulas, checks, curriculum links, and
+  practice check semantics were retained. The project owner has not independently
+  attested to the original Learn content’s provenance. See `docs/PROVENANCE.md`.
+- The provenance record documents the process and remaining uncertainty. It is
+  not an independent ownership verification, legal clearance, or compatibility
+  certification.
 - No third-party font files or remote font imports are present. `Inter` is a
   CSS family name with system fallbacks.
 - `docs/a11y/lighthouse.html` is a generated Lighthouse report carrying an

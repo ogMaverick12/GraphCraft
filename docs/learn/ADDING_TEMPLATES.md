@@ -1,10 +1,11 @@
 # Adding Learn templates (Stage 5 LEARN-01)
 
-Every template is GraphCraft-original prose plus engine-checked
-mathematics. Copying textbook pages, proprietary course content, or
-claiming curriculum alignment (JEE/CBSE/NCRT or otherwise) without a
-deliberately checked, documented mapping is forbidden — tests enforce
-the last two.
+Every template combines human-readable prose with engine-checked mathematics.
+The current library's prose was rewritten in a documented clean-room pass during
+S8.17 (`docs/PROVENANCE.md`). Copying textbook pages, proprietary course content,
+or claiming curriculum alignment (JEE/CBSE/NCRT or otherwise) without a
+deliberately checked, documented mapping is forbidden — tests enforce the last
+two.
 
 ## Where templates live
 
@@ -34,12 +35,14 @@ the last two.
    (integers, known constants) over pretty-but-irrational ones.
 6. **Viewport**: finite ranges, max above min, within ±1e12, chosen so
    the described behaviour is visible (asymptotes, turns, gaps).
-7. **Prose**: concise `description` (what the graph shows),
-   `objective` starting with an action ("Locate…", "Contrast…"),
-   `simplifications` whenever a convention is arbitrary (signum at 0,
-   jump rendering, pole gaps).
-8. **Attribution**: omit for GraphCraft-original work; required
-   (author/source/licence) for anything derived.
+7. **Prose**: write concise, independently worded `description` (what the
+   graph shows) and `objective` starting with an action ("Locate…",
+   "Contrast…"); add `simplifications` whenever a convention is arbitrary
+   (signum at 0, jump rendering, pole gaps). Do not paste or closely paraphrase
+   external text.
+8. **Attribution**: record author/source/licence for anything derived from
+   external material. Omit only when no external source was used; an omitted
+   field records no source, not proof of originality.
 
 ## Verification before merge
 
@@ -77,7 +80,7 @@ levels, acyclic prerequisites, and 1–8 existing template ids.
 
 ## Practice items
 
-`src/learn/practice.ts` holds authored prompts (`PRACTICE_ITEMS`):
+`src/learn/practice.ts` holds curated prompts (`PRACTICE_ITEMS`):
 `predict-transform` and `match-graph` carry options plus a stored
 correct index; `identify-feature` carries a numeric set with
 tolerance (order-insensitive, duplicates positional); `explore`
@@ -87,8 +90,15 @@ only); algebraic equivalence beyond the offered forms is out of
 scope and must be stated in the explanation, not guessed. Progress
 (last topic, answered/revealed marks) persists in guarded storage
 (`progress.ts`) and degrades to stateless practice. Authoring rules:
-original prompts, level labels, one topic + one template each, and
-a `validatePractice` pass on every suite run.
+independently written prompts, level labels, one topic + one template each,
+and a `validatePractice` pass on every suite run.
+
+## Provenance
+
+The S8.17 clean-room rewrite and favicon replacement are recorded in
+`docs/PROVENANCE.md`. That record describes process and remaining uncertainty;
+it is not an independent ownership verification or legal clearance. The project
+owner has not independently attested to the original Learn content’s provenance.
 
 No AI tutoring, no remote fetching, no new dependencies for
 templates — static data plus the existing engine.

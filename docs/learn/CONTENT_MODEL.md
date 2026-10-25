@@ -6,9 +6,9 @@ tutoring service — everything ships with the app and works offline.
 ## Layers
 
 ```
-src/learn/templates.ts    42 original templates (stable ids, specs, anchors)
+src/learn/templates.ts    42 templates (stable ids; prose rewritten in S8.17)
 src/learn/topics.ts       12 topics (titles, summaries, levels, prereq DAG, template ids)
-src/learn/practice.ts     8 authored prompts (options/sets/solutions per kind)
+src/learn/practice.ts     8 prompts (options/sets/solutions per kind)
 src/learn/library.ts      template validation, search, row builders, anchor checks
 src/learn/curriculum.ts   topic validation (refs, DAG cycles), lesson resolve, learning paths, duplicate audit
 src/learn/bookmarks.ts    guarded localStorage stars (degrades to empty)
@@ -20,6 +20,18 @@ src/learn/LearnLibrary.tsx  search/filter cards, previews, compare, open, bookma
 Content (`templates.ts`, `topics.ts`) holds no components; the view
 (`LearnLibrary.tsx`) holds no mathematics beyond mapping sample points
 to pixels. Validation lives beside the data it guards.
+
+## Provenance
+
+The S8.17 clean-room pass rewrote all 42 template titles, descriptions,
+objectives, annotation details, simplification notes, transform notes, and
+continuity prose; all 12 topic summaries; and all 8 practice prompts and
+explanations. Three prose/match solutions and two match option lists were
+updated to the new template titles; five formula/number solutions were retained.
+Stable ids, formulas, checks, viewports, curriculum links, and practice check
+semantics were retained. See `docs/PROVENANCE.md`. The record describes process
+and unresolved provenance; it is not legal clearance, and the project owner has
+not independently attested to the original Learn content’s provenance.
 
 ## Offline, accessibility, and performance notes
 

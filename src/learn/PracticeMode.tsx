@@ -147,7 +147,7 @@ function PracticeCard({ item, state, onAnswered, onRevealed, onOpenTemplate }: {
 }
 
 /**
- * Practice mode (Stage 5 S5.4): authored prompts with decidable
+ * Practice mode (Stage 5 S5.4): curated prompts with decidable
  * checking. Feedback comes only from `checkPracticeAnswer` — never
  * from a heuristic — and exploration items carry no correctness
  * indicator at all. Progress (last topic, answered/revealed marks)
@@ -181,8 +181,8 @@ export function PracticeMode({ onOpenTemplate }: PracticeModeProps): React.JSX.E
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-4">
       <div className="rounded-lg border border-line bg-surface p-4 shadow-panel">
-        <h2 className="text-sm font-semibold text-ink">Practice — check yourself against verified solutions</h2>
-        <p className="mt-1 text-xs text-muted">Authored prompts only. Checked answers come from exact comparisons; exploration has no score.</p>
+        <h2 className="text-sm font-semibold text-ink">Practice — check yourself against worked solutions</h2>
+        <p className="mt-1 text-xs text-muted">Curated prompts only. Checked answers come from exact comparisons; exploration has no score.</p>
         <label className="mt-3 block text-xs text-muted">
           <span className="font-semibold uppercase tracking-wide">Topic</span>
           <select

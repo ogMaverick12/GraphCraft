@@ -1,12 +1,16 @@
 import type { LearnLevel } from './library.ts'
 
 /**
- * Practice mode (Stage 5 S5.4): original authored prompts with
- * deterministic checking. Correctness comes only from exact,
- * decidable comparisons — stored option indices and numeric-set
- * matching within tolerance. Exploration items carry NO correctness
- * indicator at all: there is nothing to be "right" about, and the UI
- * says so. No accounts, no scores sent anywhere, no AI, no analytics.
+ * Practice mode (Stage 5 S5.4): curated prompts with deterministic
+ * checking. Prompts, solutions, and explanations were rewritten in the
+ * S8.17 clean-room pass; ids, graph references, correct option
+ * indices, expected numeric sets, and tolerances are unchanged. Five
+ * formula/number solutions were retained; three prose/match solutions
+ * and two match-item option lists were updated to the new template
+ * titles. See docs/PROVENANCE.md. Correctness comes only from exact,
+ * decidable comparisons. Exploration items carry NO correctness indicator at all:
+ * there is nothing to be "right" about, and the UI says so. No accounts,
+ * no scores sent anywhere, no AI, no analytics.
  */
 
 export type PracticeKind = 'predict-transform' | 'identify-feature' | 'match-graph' | 'explore'
@@ -17,7 +21,7 @@ export interface PracticeItem {
   readonly topicId: string
   readonly kind: PracticeKind
   readonly levels: LearnLevel[]
-  /** Original authored prompt (no generated text). */
+  /** Curated prompt written for this library (no generated text). */
   readonly prompt: string
   /** Graph context: opened on demand, additively, never overwriting work. */
   readonly templateId: string
@@ -135,93 +139,93 @@ export const PRACTICE_ITEMS: PracticeItem[] = [
     topicId: 'quadratics',
     kind: 'predict-transform',
     levels: ['school', 'competition'],
-    prompt: 'y = x² shifts right by 2. Which equation is the result?',
+    prompt: 'The graph of y = x² is moved 2 units to the right. Which expression describes the new graph?',
     templateId: 'shift-right-parabola',
     options: ['(x−2)²', '(x+2)²', 'x²−2', 'x²+2'],
     correctIndex: 0,
     solution: '(x−2)²',
-    explanation: 'Inside the brackets, minus means right: f(x−2) moves every point toward +x. The trap answer (x+2)² shifts left.',
+    explanation: 'Replacing x by x − 2 delays each input by 2, so the whole parabola moves toward positive x. The expression (x + 2)² shifts left.',
   },
   {
     id: 'predict-reflect',
     topicId: 'polynomial-behaviour',
     kind: 'predict-transform',
     levels: ['school'],
-    prompt: 'y = x³ is mirrored across the y-axis. Which equation is the result?',
+    prompt: 'The graph of y = x³ is reflected across the y-axis. Which expression gives the reflected graph?',
     templateId: 'reflect-cubic',
     options: ['(−x)³', 'x³−1', 'x³+1', '(x−1)³'],
     correctIndex: 0,
     solution: '(−x)³',
-    explanation: 'f(−x) mirrors on y. Note: −(x³) is an equally correct form for odd powers — the options fix one written form.',
+    explanation: 'Substituting −x for x mirrors each point to the opposite side of the y-axis. For an odd power, (−x)³ and −(x³) are equal, so both describe the same reflected curve; the options select one written form.',
   },
   {
     id: 'predict-frequency',
     topicId: 'trigonometric-graphs',
     kind: 'predict-transform',
     levels: ['school', 'competition'],
-    prompt: 'y = sin(x) is squeezed to twice the frequency. Which equation is the result?',
+    prompt: 'The graph of y = sin(x) is compressed horizontally so that it completes twice as many cycles in the same interval. Which expression matches?',
     templateId: 'horizontal-scale-sine',
     options: ['sin(2x)', '2·sin(x)', 'sin(x/2)', 'sin(x)+2'],
     correctIndex: 0,
     solution: 'sin(2x)',
-    explanation: 'f(2x) compresses horizontally by 1/2. 2·sin(x) instead doubles the height — a different change.',
+    explanation: 'Multiplying the input by 2 makes the sine function run through its cycle twice as fast, halving the horizontal span of each wave. Multiplying the output by 2 would change the height instead.',
   },
   {
     id: 'identify-quadratic-roots',
     topicId: 'quadratics',
     kind: 'identify-feature',
     levels: ['school'],
-    prompt: 'List the x-intercepts (roots) of y = x² − 4, separated by commas. Order does not matter.',
+    prompt: 'Find the x-values where y = x² − 4 crosses the x-axis. Enter them separated by commas; order does not matter.',
     templateId: 'parabola-vertex',
     expectedNumbers: [-2, 2],
     tolerance: 1e-9,
     solution: '−2, 2',
-    explanation: 'x² − 4 = 0 gives x = ±2: both crossings, in any order.',
+    explanation: 'Setting x² − 4 = 0 gives x² = 4, so the two crossings are x = −2 and x = 2.',
   },
   {
     id: 'identify-exp-intercept',
     topicId: 'exponentials-logarithms',
     kind: 'identify-feature',
     levels: ['school'],
-    prompt: 'What is the y-intercept of y = eˣ? Enter the single number.',
+    prompt: 'Find the y-value where y = eˣ meets the y-axis. Enter one number.',
     templateId: 'exponential-growth',
     expectedNumbers: [1],
     tolerance: 1e-9,
     solution: '1',
-    explanation: 'e⁰ = 1: every exponential a·e^(bx) is scaled from this crossing.',
+    explanation: 'At x = 0, e⁰ = 1, so the graph crosses the y-axis at y = 1.',
   },
   {
     id: 'match-unit-circle',
     topicId: 'conic-sections',
     kind: 'match-graph',
     levels: ['school'],
-    prompt: 'Which template draws the circle of radius 1 centered on the origin?',
+    prompt: 'Which template represents the set of points exactly 1 unit from the origin?',
     templateId: 'unit-circle',
-    options: ['Unit circle (implicit)', 'Hyperbola in two branches', 'Ellipse, parametric form', 'Cardioid'],
+    options: ['Unit circle as an implicit relation', 'Hyperbola opening left and right', 'Ellipse traced by cosine and sine', 'Cardioid polar curve'],
     correctIndex: 0,
-    solution: 'Unit circle (implicit)',
-    explanation: 'x² + y² = 1: every plotted point is distance 1 from the origin.',
+    solution: 'Unit circle as an implicit relation',
+    explanation: 'The equation x² + y² = 1 is satisfied exactly by points at distance 1 from (0, 0), which is the unit circle.',
   },
   {
     id: 'match-even-corner',
     topicId: 'corners-steps',
     kind: 'match-graph',
     levels: ['school'],
-    prompt: 'Which template is even with a corner at the origin?',
+    prompt: 'Which template shows a function that is symmetric about the y-axis and has a sharp corner at the origin?',
     templateId: 'absolute-value',
-    options: ['Absolute value corner', 'Signum step function', 'Floor staircase', 'Reciprocal hyperbola'],
+    options: ['Absolute-value graph with a sharp corner', 'Sign function built from three rules', 'Greatest-integer staircase', 'Reciprocal curve with a vertical pole'],
     correctIndex: 0,
-    solution: 'Absolute value corner',
-    explanation: '|x| mirrors across the y-axis with a non-differentiable corner at (0, 0).',
+    solution: 'Absolute-value graph with a sharp corner',
+    explanation: 'The absolute-value graph satisfies f(−x) = f(x), and its two straight arms meet at a corner where the slope changes abruptly.',
   },
   {
     id: 'explore-rose-coefficient',
     topicId: 'polar-parametric-curves',
     kind: 'explore',
     levels: ['college'],
-    prompt: 'Open the rose, then edit its sources (try 2·cos(3θ)): how do petal count and length respond? No checked answer — explore.',
+    prompt: 'Open the four-petal rose and change its equation (for example, try 2·cos(3θ)). Watch how the number of petals and their length respond. This is exploration; no answer is checked.',
     templateId: 'rose-four-petals',
-    solution: 'Petal count follows the frequency (2θ → 4 petals); amplitude sets petal length.',
-    explanation: 'Guided exploration: the graph is the feedback, not a score.',
+    solution: 'The multiplier outside cosine sets petal length; the integer inside cosine controls how many petals appear. Test a few values and compare the graph.',
+    explanation: 'Use the live graph as feedback: change one coefficient at a time, then describe what changed. There is no score for this item.',
   },
 ]

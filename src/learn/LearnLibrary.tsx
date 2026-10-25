@@ -252,7 +252,7 @@ export function LearnLibrary({ onOpenTemplate, onApplyView, activeAnnotationId, 
       <>
       <div className="rounded-lg border border-line bg-surface p-4 shadow-panel">
         <h2 className="text-sm font-semibold text-ink">Learn — curated graph templates</h2>
-        <p className="mt-1 text-xs text-muted">Original GraphCraft examples with checked properties. Opening adds editable copies to Graph Studio — your current graph is never overwritten.</p>
+        <p className="mt-1 text-xs text-muted">Curated library examples with checked properties. Opening adds editable copies to Graph Studio — your current graph is never overwritten.</p>
         <label className="mt-3 block text-xs text-muted">
           <span className="font-semibold uppercase tracking-wide">Collection (topic path)</span>
           <select

@@ -182,8 +182,8 @@
 
 ## ADR-036: Learn teaches through the same engine or not at all (LEARN-01)
 - Status: accepted 2026-10-16.
-- Reason: a template that shows something the math engine would not produce teaches falsehoods; copied textbook content risks licences and describes other tools' behavior. So every template is GraphCraft-original prose over engine-checked anchors (compiled and probed in tests), previews render through the real sampler, opening adds editable copies atomically (a batch-add fix this stage: sequential ref-mirror appends dropped all but the last row), and curriculum alignment is never claimed.
-- Consequence: `src/learn/` owns types, validation, search, 42 templates, guarded bookmarks, and the quiet library UI; `App` gains a lazy Learn view plus additive open; contributor rules live in `docs/learn/ADDING_TEMPLATES.md`. No tutor, no remote fetching, no new dependency.
+- Reason: a template that shows something the math engine would not produce teaches falsehoods; copied textbook content risks licences and describes other tools' behavior. Human-readable prose was therefore rewritten in a documented clean-room pass during S8.17 over engine-checked anchors (compiled and probed in tests); previews render through the real sampler, opening adds editable copies atomically (a batch-add fix this stage: sequential ref-mirror appends dropped all but the last row), and curriculum alignment is never claimed. The project owner has not independently attested to the earlier text's provenance; see `docs/PROVENANCE.md`.
+- Consequence: `src/learn/` owns types, validation, search, 42 templates, guarded bookmarks, and the quiet library UI; `App` gains a lazy Learn view plus additive open; contributor rules live in `docs/learn/ADDING_TEMPLATES.md`. The 42 stable ids, formulas, checks, and curriculum links were retained through the S8.17 rewrite. No tutor, no remote fetching, no new dependency.
 
 ## ADR-038: Annotations are curated claims with a basis, not decorations (S5.2)
 - Status: accepted 2026-10-16.

@@ -17,8 +17,9 @@ offline after the first load.
 - **Data Lab** — CSV import with preview-before-commit, cleaning,
   scatter/line/bar/histogram plots, OLS + linearized fits with honest
   diagnostics, uncertainty bars, figure/table export.
-- **Learn** — 42 original graph templates with verified properties,
-  topic paths, annotations, and practice mode.
+- **Learn** — 42 graph templates with checked properties, topic paths,
+  annotations, and practice mode. Human-readable prose was rewritten in
+  the S8.17 clean-room pass; see `docs/PROVENANCE.md`.
 - **3D + fields** — bounded `z = f(x, y)` surfaces, contours,
   heatmaps, vector fields, and dataset-backed 3D scatter.
 - **Projects** — versioned `*.graphcraft.json` save/open with

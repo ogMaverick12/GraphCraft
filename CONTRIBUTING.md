@@ -58,9 +58,12 @@ and a minimal project file or expression when relevant.
 
 ## Adding a graph template
 
-Read `docs/learn/ADDING_TEMPLATES.md` first. Templates must be
-original prose and equations (no copied textbook or tool content), pass
-engine-anchored verification, and never claim curriculum alignment.
+Read `docs/learn/ADDING_TEMPLATES.md` first. Templates must use
+independently written prose and equations (no copied textbook or tool
+content), pass engine-anchored verification, and never claim curriculum
+alignment. The S8.17 rewrite record is `docs/PROVENANCE.md`; it describes
+process and remaining uncertainty, not an ownership or legal-clearance
+conclusion.
 
 ## Adding a numerical algorithm
 

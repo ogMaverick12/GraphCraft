@@ -3,11 +3,16 @@ import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { App } from '../app/App.tsx'
 
+/** The lazy LearnLibrary chunk can exceed Testing Library's 1s default under suite load. */
+const LEARN_LIBRARY_READY_TIMEOUT = 5_000
+
 async function openPractice(user: ReturnType<typeof userEvent.setup>): Promise<void> {
   render(<App />)
   await user.click(screen.getByRole('button', { name: 'Show learn library' }))
   await screen.findByRole('main', { name: 'Learn' })
-  // The library loads on demand; wait past the Suspense fallback.
+  // The outer main renders while the lazy library is still in Suspense.
+  // Wait for the loaded library's section group before querying its tab.
+  await screen.findByRole('group', { name: 'Learn section' }, { timeout: LEARN_LIBRARY_READY_TIMEOUT })
   await user.click(await screen.findByRole('button', { name: 'Learn practice' }))
   await screen.findByRole('combobox', { name: 'Practice topic' })
 }
@@ -28,6 +33,8 @@ describe('practice mode', () => {
     await screen.findByRole('main', { name: 'Graph viewport' })
     await user.click(screen.getByRole('button', { name: 'Show learn library' }))
     await screen.findByRole('main', { name: 'Learn' })
+    // The library is lazy; wait for its loaded section group before its tab.
+    await screen.findByRole('group', { name: 'Learn section' }, { timeout: LEARN_LIBRARY_READY_TIMEOUT })
     await user.click(await screen.findByRole('button', { name: 'Learn practice' }))
     await screen.findByRole('combobox', { name: 'Practice topic' })
     // Last topic restored; the answered mark survived the round trip.
@@ -84,7 +91,7 @@ describe('practice mode', () => {
     await screen.findByTestId('learn-count')
 
     fireEvent.change(screen.getByRole('searchbox', { name: 'Search templates' }), { target: { value: 'shift inside' } })
-    await user.click(screen.getByRole('button', { name: 'Compare Shift inside the brackets goes right with original' }))
+    await user.click(screen.getByRole('button', { name: 'Compare Horizontal shift inside a squared term with original' }))
     await screen.findByRole('main', { name: 'Graph viewport' })
     // Base plus transformed: two rows, existing (empty) project untouched otherwise.
     expect(screen.getByText('2 expressions')).toBeInTheDocument()

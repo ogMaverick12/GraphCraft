@@ -1,8 +1,19 @@
 # GraphCraft — Design system note (Stage 1 shell)
 
 Independent system. Reference tools (Desmos, GeoGebra, Veusz) informed workflow
-principles only; no layout, icon, asset, or brand copied. See
-`docs/research/REFERENCE_WORKFLOWS.md`.
+principles only; workflow research is recorded in
+`docs/research/REFERENCE_WORKFLOWS.md`. This note records design intent, not a
+legal provenance audit. The current favicon is a GraphCraft-specific replacement
+created in S8.17; its process record is `docs/PROVENANCE.md`. That record is not
+independent ownership verification or legal clearance.
+
+## Favicon
+
+`public/favicon.svg` is a 64×64 rounded cream tile with ink axes, an indigo
+plotted curve, and an orange sample point. It was drawn from scratch for the
+S8.17 replacement and does not reuse the earlier favicon's path, mask, glow
+ellipses, filters, or palette. The `/favicon.svg` URL and manifest reference
+are unchanged. See `docs/PROVENANCE.md`.
 
 ## Tokens (`src/index.css`)
 Single source of truth; components use semantic utilities only
