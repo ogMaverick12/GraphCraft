@@ -57,9 +57,15 @@ property, not a feature flag.
 - Activate deletes every non-current cache and claims clients: corrupt
   or outdated caches are dropped, never preferred (the v1→v2 purge was
   observed live).
-- The worker guards `typeof caches` and catches cache read/write
-  failures, so a storage-refusing browser degrades to online-first
-  behaviour instead of erroring.
+- Fetch handling guards `typeof caches` and catches cache read/write
+  failures, so an active worker degrades to online-first behaviour when
+  cache operations fail. Install and activate do not guard a missing
+  `caches` object: install calls `caches.open` directly, and activate
+  calls `caches.keys` directly (a rejected keys call is caught, but a
+  missing object is not). Individual precache entries are best-effort;
+  a missing/refused Cache API or failed cache open fails worker
+  installation. A failed first install leaves no controlling worker, so
+  the app remains online-only; no worker-refusal notice is shown.
 - User data boundary: project files travel as file downloads/uploads;
   preferences, history, and session backup live in guarded
   `localStorage`. Neither enters the Cache API.

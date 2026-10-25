@@ -28,7 +28,7 @@ CI enforcement: `scripts/check-licenses.mjs` (dependency-free) checks every dire
 | @testing-library/user-event | 14.6.8 | Realistic input simulation | MIT | Yes, active |
 | @types/react / react-dom / node | 19.3.0 / 19.3.0 / 24.19.2 | Type definitions | MIT (DefinitelyTyped) | Yes |
 
-## Bundle review (measured 2026-10-17, S7.5 baseline production build)
+## Bundle review (historical baseline — measured 2026-10-17, S7.5 production build)
 
 | Chunk | Raw (KiB) | Gzip (KiB) | Notes |
 |---|---|---|---|
@@ -40,7 +40,7 @@ CI enforcement: `scripts/check-licenses.mjs` (dependency-free) checks every dire
 | `stats` (lazy) | 20.5 | 6.7 | Calculator stats-lane split |
 | CSS | 20.4 | 5.0 | Tailwind tokens |
 
-Method: fresh `npm run build`; raw = on-disk bytes, gzip = `node:zlib.gzipSync` per file, KiB (Vite prints decimal kB for the same bytes). Full output including `index.html`, `sw.js`, favicon and manifest, plus the reproducible script, benchmark tables and budgets, are in `docs/perf/S7.5-BASELINE.md`. Note: Learn template data still ships in the initial chunk (eager imports, SOURCE-VERIFIED); extraction is a tracked S7.5 item, so `index` is expected to shrink in a later measurement.
+Method: fresh `npm run build`; raw = on-disk bytes, gzip = `node:zlib.gzipSync` per file, KiB (Vite prints decimal kB for the same bytes). Full output including `index.html`, `sw.js`, favicon and manifest, plus the reproducible script, benchmark tables and budgets, are in `docs/perf/S7.5-BASELINE.md`. Historical note: at the S7.5 measurement, Learn template data did ship in the initial chunk via eager imports; S7.5.1 later extracted it into a lazy `templates` chunk loaded by `LearnLibrary`. The table above is therefore the historical baseline, not a current measurement. Current build evidence (available `dist/`, not a fresh benchmark): `index-*.js` 564,162 B raw / 166,608 B gzip (550.9/162.7 KiB); `templates-*.js` 31,945 B raw / 7,876 B gzip (31.2/7.7 KiB), lazy and imported by `LearnLibrary`.
 
 Lazy-loading decisions: Calculator and Data Lab route-level `lazy()` in `App.tsx` (graph-first startup); no route prefetches (explicit user navigation only). No new dependency added since FND-01; export/CSV/figure/v6 work is dependency-free by design (in-house PNG encoder, native CSV, versioned JSON).
 

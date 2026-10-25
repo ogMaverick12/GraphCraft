@@ -124,9 +124,13 @@ network. There is no backend, account, or telemetry to reach.
   workspace shows an honest reload message while the rest keeps
   working; if the whole cache is gone, you get a short offline notice
   instead of a partial page. A missing licence or notice file returns
-  honest plain-text 503 content, never the app shell. If the browser
-  refuses workers or storage is full, the app keeps loading online and
-  says so — delete the site data and reload once to rebuild the cache.
+  honest plain-text 503 content, never the app shell. If browser storage
+  is full, preference and session-backup writes fail with an in-app
+  notice; Save to file remains available. If the browser refuses
+  service-worker registration or installation, the app keeps loading
+  online and shows no separate worker-status warning; a failed first
+  install simply leaves no offline cache. Delete the site data and reload
+  once to retry cache setup.
 - **Verify:** `npm run build && npm run preview`, load once, then in
   DevTools → Network check **Offline** and reload — every workspace
   must work. Check Application → Service Workers for the active
